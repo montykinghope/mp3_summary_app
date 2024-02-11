@@ -1,9 +1,7 @@
-
+from openai import OpenAI
+import openai
 
 def audio_summarize(audio_file):
-
-    from openai import OpenAI
-    import openai
 
     # Whisper API Key
     client = OpenAI(api_key="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")
