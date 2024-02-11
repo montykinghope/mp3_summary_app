@@ -1,10 +1,13 @@
 from openai import OpenAI
 import openai
+import os
 
 def audio_summarize(audio_file):
 
+    api_key = os.environ.get('mkh_openai_apikey')
+
     # Whisper API Key
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key=api_key)
 
     # Whisper Completion
     audio_file = open(audio_file, "rb")
@@ -15,7 +18,7 @@ def audio_summarize(audio_file):
     )
 
     # GPT API Key
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key=api_key)
 
     # GPT Completion
     chat_completion = client.chat.completions.create(
@@ -26,3 +29,6 @@ def audio_summarize(audio_file):
     reply_content = chat_completion.choices[0].message.content
 
     return transcript, reply_content
+
+transcript, summary = audio_summarize("recording_4,_date_20240116-1407_.wav")
+print(summary)
